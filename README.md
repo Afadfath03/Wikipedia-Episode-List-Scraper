@@ -29,5 +29,5 @@ This repository contains a Node.js script that scrapes data from Wikipedia table
     ```bash
     node wiki-table-scraper.js
     ```
-5. Enter Wikipedia URL (e.g., https://en.wikipedia.org/wiki/List_of_XX_episodes)
+5. Enter Wikipedia URL
 6. Choose Output Format (JSON or TXT)
