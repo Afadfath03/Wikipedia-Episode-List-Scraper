@@ -35,13 +35,11 @@ function getDesiredFormat() {
       (formatChoice) => {
         readline.close();
 
-        const validFormats = { 'json': "JSON", 'txt': "TXT", 1: "JSON", 2: "TXT" };
+        const validFormats = { json: "JSON", txt: "TXT", 1: "JSON", 2: "TXT" };
         const chosenFormat = validFormats[formatChoice.toLowerCase()];
 
         if (!chosenFormat) {
-          reject(
-            new Error("Invalid format. Please choose available format.")
-          );
+          reject(new Error("Invalid format. Please choose available format."));
         } else {
           resolve(chosenFormat);
         }
@@ -59,16 +57,21 @@ async function scrapeWikipediaTable(url) {
     // Get the titles
     const episodeTitles = [];
     table.find("tr.module-episode-list-row").each(function (index) {
-      const titleElement = $(this)
-        .find("td.summary")
-        .contents()
-        .filter(function () {
-          return this.nodeType === 3;
-        })
-        .first();
+      const titleElement = $(this).find("td.summary");
       const titleText = titleElement.text().trim();
 
-      episodeTitles.push(titleText);
+      const transliterationIndex = titleText
+        .toLowerCase()
+        .indexOf("transliteration:");
+
+      let episodeTitle;
+      if (transliterationIndex !== -1) {
+        episodeTitle = titleText.substring(0, transliterationIndex).trim();
+      } else {
+        episodeTitle = titleText;
+      }
+
+      episodeTitles.push(episodeTitle);
     });
 
     return episodeTitles;
