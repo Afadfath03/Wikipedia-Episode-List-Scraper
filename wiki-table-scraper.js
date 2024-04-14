@@ -54,7 +54,7 @@ async function scrapeWikipediaTable(url) {
   try {
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
-    const table = $("table.wikiepisodetable");
+    const table = $("table.wikitable");
 
     // Get the titles
     const episodeTitles = [];
