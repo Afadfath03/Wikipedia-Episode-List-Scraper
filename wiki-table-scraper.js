@@ -31,12 +31,12 @@ function getDesiredFormat() {
 
   return new Promise((resolve, reject) => {
     readline.question(
-      "\nAvailable file format: \n1. JSON \n2. TXT \nChoose file format : ",
+      "\nAvailable file format: \n1. JSON \n2. TXT (Numbered List) \n3. TXT (Unnumbered List) \nChoose file format : ",
       (formatChoice) => {
         readline.close();
 
-        const validFormats = { json: "JSON", txt: "TXT", 1: "JSON", 2: "TXT" };
-        const chosenFormat = validFormats[formatChoice.toLowerCase()];
+        const validFormats = {1: "JSON", 2: "TXTN", 3: "TXTU" };
+        const chosenFormat = validFormats[parseInt(formatChoice)];
 
         if (!chosenFormat) {
           reject(new Error("Invalid format. Please choose available format."));
@@ -104,6 +104,22 @@ function createNumberedListFile(filePath, list) {
   });
 }
 
+function createUnNumberedListFile(filePath, list) {
+  const fs = require("fs");
+  return new Promise((resolve, reject) => {
+    const content = list.join("\n");
+    fs.writeFile(filePath, content, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(`\nTXT file saved to ${filePath}`);
+        resolve();
+      }
+    });
+  });
+}
+
+
 function createJSONFile(filePath, jsonData) {
   return new Promise((resolve, reject) => {
     fs.writeFile(filePath, jsonData, (err) => {
@@ -128,14 +144,22 @@ async function main() {
 
     const desiredFormat = await getDesiredFormat();
     let writeFunction;
-    const fileName = `${desiredFormat}_${timestamp}.${desiredFormat.toLowerCase()}`;
+    let fileName;
 
     if (desiredFormat === "JSON") {
+      fileName = `episode_titles_${timestamp}.json`;
       episodeData = JSON.stringify(episodeTitles, null, 2); // Convert to JSON string
       writeFunction = createJSONFile;
-    } else {
+    } else if (desiredFormat === "TXTU") {
+      fileName = `episode_titles_${timestamp}.txt`;
+      episodeData = episodeTitles;
+      writeFunction = createUnNumberedListFile;
+    } else if (desiredFormat === "TXTN") {
+      fileName = `episode_titles_${timestamp}.txt`;
       episodeData = episodeTitles;
       writeFunction = createNumberedListFile;
+    } else{
+      console.error("Invalid format. Please choose available format.");
     }
 
     await writeFunction(path.join(resultFolderPath, fileName), episodeData); // Use appropriate function based on user choice
