@@ -4,30 +4,17 @@
 
 This repository contains a Node.js script that scrapes data from Wikipedia tables. It utilizes Axios for making HTTP requests, Cheerio for HTML parsing, and Moment for timestamp creation.
 
----
-
-## Features
-
-- **HTTP Requests:** Uses Axios for efficient HTTP requests.
-- **HTML Parsing:** Utilizes Cheerio for parsing HTML structure.
-- **Data Extraction:** Extracts data from episode tables on Wikipedia pages.
-- **Error Handling:** Handles errors gracefully for a smooth scraping experience.
+Mainly i'm use this to scrapes list of episode titles from TV series but feel free to customize it.
 
 ---
 
 ## Usage
 
-1. Clone the Repository
-    ```bash
-    git clone https://github.com/Afadfath03/Wikipedia-Table-Scraper.git
-    ```
-2. Navigate to the Project Directory
-    ```bash
-    cd Wikipedia-Table-Scraper
-    ```
-4. Run the Script
-    ```bash
-    node wiki-table-scraper.js
-    ```
-5. Enter Wikipedia URL
-6. Choose Output Format (JSON or TXT)
+### Download repositories
+1. Download this Repository or you can [click this link](https://codeload.github.com/Afadfath03/Wikipedia-Table-Scraper/zip/refs/heads/main)
+2. Extract it to somewhere you want
+
+### Using the script
+1. Run the Script using terminal
+2. Enter Wikipedia URL
+3. Choose Output Format (JSON or TXT)
