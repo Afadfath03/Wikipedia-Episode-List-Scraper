@@ -31,7 +31,7 @@ function getDesiredFormat() {
 
   return new Promise((resolve, reject) => {
     readline.question(
-      "\nFile format available: \n1. JSON \n2. TXT \nChoose file format : ",
+      "\nAvailable file format: \n1. JSON \n2. TXT \nChoose file format : ",
       (formatChoice) => {
         readline.close();
 
