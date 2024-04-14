@@ -1,4 +1,4 @@
-# Wikipedia-Episode-Name-Scraper
+# Wikipedia-Table-Scraper
 Wikipedia Table Scraper using Node.js and Cheerio
 
 This repository contains a Node.js script that scrapes data from Wikipedia tables. It uses Axios to fetch the HTML content and Cheerio to parse the structure. Currently, it targets episode tables (`.wikiepisodetable`) and extracts episode titles from the summary cells (`.summary`).
